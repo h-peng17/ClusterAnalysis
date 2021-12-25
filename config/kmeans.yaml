@@ -1,0 +1,4 @@
+n_clusters: 3
+init: k-means++
+max_iter: 300
+tol: 0.0001
