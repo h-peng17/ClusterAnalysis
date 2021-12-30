@@ -47,6 +47,8 @@ def load_data(input_file):
         reader = csv.reader(f, delimiter=',')
         for idx, line in enumerate(reader):
             if idx == 0:
+                for i, item in enumerate(line):
+                    print(i, item)
                 continue
             data.append([float(x) if x != "" else np.nan for x in line[1:]])
     return np.array(data, dtype=np.float32)
