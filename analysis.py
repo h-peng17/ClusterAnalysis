@@ -95,10 +95,11 @@ def analysis_empty(out_dir="img"):
 
 def draw(data, centers, out_dir="img"):
     fig, axes = plt.subplots(1,1)
-    pca = PCA(n_components=2)
+    pca = PCA(n_components=17)
     new_data = pca.fit_transform(data) 
-    axes.scatter(new_data[:,0], new_data[:,1],c='b',marker='o',alpha=0.5)
-    axes.scatter(centers[:,0], centers[:,1],c='r',marker='*',alpha=0.5)
+    pdb.set_trace()
+    axes.scatter(new_data[:,0], new_data[:,1], c='b', marker='o',alpha=0.5)
+    axes.scatter(centers[:,0], centers[:,1], c='r', marker='*',alpha=0.5)
     plt.savefig(os.path.join(out_dir, "kmeans.png"), dpi=600, format="png")
     plt.close()
 

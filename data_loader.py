@@ -37,9 +37,10 @@ def standarize(data):
 def prepare_data(input_file: str, imputer: str="none") -> np.array:
     # load and shuffle
     data = load_data(input_file)
-    np.random.shuffle(data)
+    # np.random.shuffle(data)
     data = standarize(impute(data, _imputer=imputer))
     return data
+
 
 def load_data(input_file):
     data = []

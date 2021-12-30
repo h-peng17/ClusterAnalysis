@@ -1,3 +1,4 @@
+import os 
 import time 
 import random
 from matplotlib.pyplot import axis
@@ -9,6 +10,12 @@ from argparse import ArgumentParser
 from model import MODEL_DICT
 from data_loader import prepare_data
 import logging
+
+from sklearn.cluster import KMeans
+
+from torch.utils.tensorboard import SummaryWriter
+# os.rmdir("logs/runs")
+writer = SummaryWriter("logs/runs")
 
 
 from tqdm import trange
@@ -70,10 +77,12 @@ def visualize(args):
     set_seed(args.seed)
     config = read_config(args.config_path)
     data = prepare_data(args.data_path, args.imputer)
-    model = MODEL_DICT[args.model](n_clusters=10, **config)
-    model.fit(data)
-    labels = model.predict(data)
-    draw(data, model.centroids)
+    # model = MODEL_DICT[args.model](n_clusters=5, **config)
+    # model.fit(data)
+    # labels = model.predict(data)
+    kmeans = KMeans(n_clusters=5, random_state=0).fit(data)
+    writer.add_embedding(data, kmeans.labels_)
+    # draw(data, model.centroids)
 
 
 if __name__ == '__main__':
