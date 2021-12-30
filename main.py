@@ -42,8 +42,8 @@ def main(args):
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--data_path', type=str, default='./data/CC GENERAL.csv')
-    parser.add_argument('--config_path', type=str, default='./config/kmeans.yaml')
-    parser.add_argument('--model', type=str, choices=['kmeans'], required=True)
+    parser.add_argument('--config_path', type=str, default='./config/grid.yaml')
+    parser.add_argument('--model', type=str, choices=['kmeans', 'grid'], default='grid')
     parser.add_argument('--imputer', type=str, choices=['none', 'simple', 'knn'], default='simple')
     parser.add_argument('--seed', type=int, default=42)
     args = parser.parse_args()

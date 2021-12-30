@@ -1,5 +1,7 @@
 from .kmeans import KMeans
+from .clique import CLIQUE
 
 MODEL_DICT = {
-    'kmeans': KMeans
+    'kmeans': KMeans,
+    'grid': CLIQUE
 }
