@@ -27,19 +27,17 @@ def impute(data, _imputer="simple"):
 
 
 def standarize(data):
-    feature = data[:, :-1]
-    label = data[:, -1:]
-    norm_feature = StandardScaler().fit_transform(feature)
-    data = np.concatenate((norm_feature, label), axis=-1)
-    return np.array(data)
+    scaler = StandardScaler()
+    norm_feature = scaler.fit_transform(data)
+    return norm_feature, scaler
 
 
 def prepare_data(input_file: str, imputer: str="none") -> np.array:
     # load and shuffle
     data = load_data(input_file)
     # np.random.shuffle(data)
-    data = standarize(impute(data, _imputer=imputer))
-    return data
+    data, norm_feature = standarize(impute(data, _imputer=imputer))
+    return data, norm_feature
 
 
 def load_data(input_file):

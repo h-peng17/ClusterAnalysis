@@ -27,11 +27,8 @@ def plot_lineplot(x, y, x_label, y_label, save_name, out_dir="img"):
             seeds.append(i)
     for j in range(y.shape[1]):
         seeds.append("avg")
-    # pdb.set_trace()
-    assert len(x*6) == len(seeds)
-    assert len(y.reshape(-1)) == len(seeds)
     data = {
-        "x": x * 6, 
+        "x": x * 4, 
         "y": y.reshape(-1),
         "seed": seeds
     }
