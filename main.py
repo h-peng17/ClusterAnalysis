@@ -117,11 +117,6 @@ def visualize(args):
     model.fit(data)
     labels = model.predict(data)
     writer.add_embedding(data, labels)
-    # dbscan = DBSCAN(eps=0.5, min_samples=5).fit(data)
-    # writer.add_embedding(data, dbscan.labels_)
-    # agg = AgglomerativeClustering(n_clusters=5).fit(data)
-    # writer.add_embedding(data, agg.labels_)
-    # draw(data, model.centroids)
 
 
 def get_names(input_file):
@@ -136,11 +131,10 @@ def main_for_interpreter(args):
     set_seed(args.seed)
     config = read_config(args.config_path)
     names = get_names(args.data_path)
-    data, norm_feature = prepare_data(args.data_path, args.imputer)
+    data, scaler = prepare_data(args.data_path, args.imputer)
     model = MODEL_DICT[args.model](n_clusters=5, **config)
     model.fit(data)
-    labels = model.predict(data)
-    centers = norm_feature.inverse_transform(model.centroids)
+    centers = scaler.inverse_transform(model.centroids)
     print(centers.shape)
     result = ""
     for j in range(centers.shape[1]):
@@ -153,7 +147,6 @@ def main_for_interpreter(args):
         f.write(result)
 
 
-
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--data_path', type=str, default='./data/CC GENERAL.csv')
@@ -164,5 +157,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     # main_for_table(args)
     # main(args)
-    # visualize(args)
-    main_for_interpreter(args)
+    visualize(args)
+    # main_for_interpreter(args)

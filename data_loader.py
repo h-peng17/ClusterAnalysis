@@ -36,8 +36,8 @@ def prepare_data(input_file: str, imputer: str="none") -> np.array:
     # load and shuffle
     data = load_data(input_file)
     # np.random.shuffle(data)
-    data, norm_feature = standarize(impute(data, _imputer=imputer))
-    return data, norm_feature
+    data, scaler = standarize(impute(data, _imputer=imputer))
+    return data, scaler
 
 
 def load_data(input_file):
